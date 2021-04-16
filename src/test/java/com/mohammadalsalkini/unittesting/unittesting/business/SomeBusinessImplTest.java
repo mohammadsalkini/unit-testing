@@ -8,7 +8,7 @@ class SomeBusinessImplTest {
 
 
     @Test
-    public void calculateSum_basic() {
+    void calculateSum_basic() {
         SomeBusinessImpl business = new SomeBusinessImpl();
         int actualResult = business.calculateSum(new int[] {1, 2, 3});
         int expectedValue= 6;
@@ -16,7 +16,7 @@ class SomeBusinessImplTest {
     }
 
     @Test
-    public void calculateSum_empty() {
+    void calculateSum_empty() {
         SomeBusinessImpl business = new SomeBusinessImpl();
         int actualResult = business.calculateSum(new int[] {});
         int expectedValue= 0;
@@ -24,11 +24,16 @@ class SomeBusinessImplTest {
     }
 
     @Test
-    public void calculateSum_oneValue() {
+    void calculateSum_oneValue() {
         SomeBusinessImpl business = new SomeBusinessImpl();
         int actualResult = business.calculateSum(new int[] {5});
         int expectedValue= 5;
         assertEquals(expectedValue, actualResult);
     }
+
+
+
+
+
 
 }
