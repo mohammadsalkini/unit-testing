@@ -1,17 +1,30 @@
 package com.mohammadalsalkini.unittesting.unittesting.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
+@Entity
 public class Item {
 
+    @Id
     private int id;
     private String name;
     private int price;
     private int quantity;
+
+    @Transient
+    private int values;
 
     public Item(int id, String name, int price, int quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public Item() {
+
     }
 
     public int getId() {
@@ -46,6 +59,14 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public int getValues() {
+        return values;
+    }
+
+    public void setValues(int values) {
+        this.values = values;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -53,6 +74,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", values=" + values +
                 '}';
     }
 }
