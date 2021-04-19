@@ -1,34 +1,42 @@
 package com.mohammadalsalkini.unittesting.unittesting.controller;
 
+import com.mohammadalsalkini.unittesting.unittesting.model.Item;
+import com.mohammadalsalkini.unittesting.unittesting.business.ItemBusinessService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(value = HelloWorldController.class)
-class HelloWorldControllerTest {
+@WebMvcTest(ItemController.class)
+class ItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private ItemBusinessService businessService;
+
     @Test
-    void HelloWorld_basic() throws Exception {
+    void itemFromBusinessService_basic() throws Exception {
+        when(businessService.retrieveHardcodedItem()).thenReturn(
+                new Item(2, "Item2", 10, 10));
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/hello-world")
+                .get("/item-from-business-service")
                 .accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().string("Hello World"))
+                .andExpect(content().json("{id:2,name:Item2,price:10}"))
                 .andReturn();
     }
 
